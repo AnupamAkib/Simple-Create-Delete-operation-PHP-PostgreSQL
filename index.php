@@ -36,12 +36,12 @@ include "student.php";
           <?php
             include "connection.php";
             $sql = "SELECT id FROM student_info order by id ASC";
-            $query_run = mysqli_query($connection, $sql);
+            $query_run = pg_query($conn, $sql);
             ?>
             <tr><th>Student ID</th><th>Name</th><th>Section</th><th>Email</th><th>Phone</th><th>Action</th></tr>
             <?php
             $cnt = 0;
-            while($row = mysqli_fetch_array($query_run)){
+            while($row = pg_fetch_array($query_run)){
               $std = new student($row['id']);
               ?>
               <tr>

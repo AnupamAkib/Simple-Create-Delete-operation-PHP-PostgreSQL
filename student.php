@@ -5,10 +5,10 @@ class student{
     include "connection.php";
     $this -> id = $id;
     $sql = "SELECT * from student_info where id = '$id'";
-    $query_run = mysqli_query($connection, $sql);
-    if(mysqli_num_rows($query_run)){
+    $query_run = pg_query($conn, $sql);
+    if(pg_num_rows($query_run)){
       $this -> found = true;
-      while($row = mysqli_fetch_array($query_run)){
+      while($row = pg_fetch_array($query_run)){
         $this -> name = $row['name'];
         $this -> section = $row['section'];
         $this -> email = $row['email'];
@@ -60,14 +60,14 @@ class student{
     $_email = $this -> getEmail();
     $_phone = $this -> getPhone();
     $sql = "INSERT into student_info VALUES('$_id', '$_name', '$_section', '$_email', '$_phone');";
-    $query_run = mysqli_query($connection, $sql);
+    $query_run = pg_query($conn, $sql);
   }
 
   function delete(){
     include "connection.php";
     $_id = $this -> getID();
     $sql = "DELETE from student_info where id='$_id'";
-    $query_run = mysqli_query($connection, $sql);
+    $query_run = pg_query($conn, $sql);
   }
 
 }
